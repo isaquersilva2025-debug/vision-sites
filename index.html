@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Sites | Experiências Digitais de Alto Padrão</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-color: #030305;
+            --bg-card: #0a0a0f;
+            --bg-card-hover: #12121c;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-glow: rgba(0, 112, 243, 0.4);
+            --primary-blue: #0070f3;
+            --neon-blue: #38bdf8;
+            --text-main: #ededed;
+            --text-muted: #888888;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* CANVAS DE PARTÍCULAS NO FUNDO */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        header, section, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* HEADER PREMIUM */
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 75px;
+            background: rgba(3, 3, 5, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--neon-blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 112, 243, 0.5);
+        }
+
+        .logo-text .highlight {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        .nav-menu ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-main);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.55rem 1.1rem;
+            background: linear-gradient(135deg, #0070f3, #00c6ff);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 50px;
+            box-shadow: 0 0 20px rgba(0, 112, 243, 0.4);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 112, 243, 0.8);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 140px 0 80px;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at center top, rgba(0, 112, 243, 0.15), transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            max-width: 800px;
+            margin: 0 auto 1.2rem;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.15;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--neon-blue), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+
+        /* VANTAGENS */
+        .benefits-section {
+            padding: 70px 0;
+            background: rgba(5, 5, 8, 0.5);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -1px;
+            padding: 0 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1rem;
+            padding: 0 1rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .benefit-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 30px rgba(0, 112, 243, 0.15);
+        }
+
+        .benefit-icon {
+            width: 46px;
+            height: 46px;
+            background: rgba(0, 112, 243, 0.1);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-blue);
+            font-size: 1.15rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .benefit-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* PORTFÓLIO */
+        .portfolio-section {
+            padding: 80px 0;
+        }
+
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(0, 112, 243, 0.15);
+            border-color: var(--neon-blue);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 112, 243, 0.25);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .portfolio-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-card.hide {
+            display: none !important;
+        }
+
+        .portfolio-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ÁREA DE ILUSTRAÇÃO (SCREENSHOTS COM NOMES GENÉRICOS) */
+        .portfolio-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Barra de Navegação do Mini-Browser */
+        .browser-topbar {
+            height: 28px;
+            background: #1e1e24;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            flex-shrink: 0;
+        }
+        .b-dot { width: 7px; height: 7px; border-radius: 50%; }
+        .b-dot-r { background: #ff5f56; }
+        .b-dot-y { background: #ffbd2e; }
+        .b-dot-g { background: #27c93f; }
+        .b-url {
+            background: #111116;
+            flex-grow: 1;
+            height: 16px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            font-size: 0.6rem;
+            color: #888;
+        }
+
+        /* 1. MOCKUP GOURMET */
+        .mock-gourmet {
+            background: #fdfbf7;
+            color: #111;
+        }
+        .gourmet-header {
+            padding: 6px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+            background: #fff;
+        }
+        .gourmet-logo { font-weight: 800; color: #b91c1c; font-size: 0.8rem; font-style: italic; }
+        .gourmet-body {
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            flex-grow: 1;
+            align-items: center;
+        }
+        .gourmet-main-img {
+            width: 55%;
+            height: 110px;
+            background: url('https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80') center/cover;
+            border-radius: 6px;
+            position: relative;
+        }
+        .gourmet-badge {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: #dc2626;
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 0.45rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1;
+        }
+        .gourmet-side {
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .gourmet-recipe-card {
+            background: #fff;
+            padding: 5px 6px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+
+        /* 2. MOCKUP LOJA VIRTUAL */
+        .mock-ecommerce {
+            background: #121212;
+            color: #fff;
+        }
+        .ec-nav {
+            background: #000;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .ec-hero {
+            flex-grow: 1;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+        }
+        .ec-title { font-size: 1rem; font-weight: 800; text-transform: uppercase; line-height: 1; }
+        .ec-btn { background: #701a35; color: #fff; padding: 3px 8px; font-size: 0.55rem; border-radius: 2px; font-weight: 600; }
+
+        /* 3. MOCKUP FITNESS */
+        .mock-fitness {
+            background: #0a0a0f;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .fit-inner {
+            display: flex;
+            flex-grow: 1;
+            position: relative;
+        }
+        .fit-img-side {
+            width: 50%;
+            background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=400&q=80') center/cover;
+            position: relative;
+        }
+        .fit-yellow-side {
+            width: 50%;
+            background: #ffcc00;
+            color: #111;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3px;
+        }
+        .fit-yellow-side h4 { font-size: 0.8rem; font-weight: 900; line-height: 1.1; }
+        .fit-yellow-side p { font-size: 0.55rem; font-weight: 700; background: #111; color: #ffcc00; padding: 2px 5px; border-radius: 3px; display: inline-block; width: max-content; }
+
+        /* 4. MOCKUP ADVOGADO */
+        .mock-lawyer {
+            background: #111;
+            color: #fff;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=500&q=80') center/cover;
+        }
+        .law-content {
+            padding: 15px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+            gap: 5px;
+        }
+        .law-brand { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 3px; width: max-content; }
+        .law-heading { font-size: 0.95rem; font-weight: 800; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .law-sub { font-size: 0.6rem; color: #ccc; }
+
+        .portfolio-content {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .portfolio-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--neon-blue);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .portfolio-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .portfolio-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .portfolio-link:hover {
+            color: var(--neon-blue);
+        }
+
+        /* ORÇAMENTO BUILDER */
+        .budget-section {
+            padding: 70px 0;
+            background: transparent;
+        }
+
+        .budget-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .budget-form-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+        }
+
+        .form-step {
+            margin-bottom: 2rem;
+        }
+
+        .form-step h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.85rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            background: #050508;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 0.85rem;
+        }
+
+        .select-card {
+            background: #050508;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .select-card input[type="radio"],
+        .select-card input[type="checkbox"] {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            accent-color: var(--neon-blue);
+        }
+
+        .select-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .select-card.active {
+            border-color: var(--neon-blue);
+            background: rgba(0, 112, 243, 0.08);
+            box-shadow: 0 0 15px rgba(0, 112, 243, 0.2);
+        }
+
+        .select-card .title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .select-card .price {
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+        }
+
+        .select-card .desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 0.7rem;
+        }
+
+        .checkbox-item {
+            background: #050508;
+            border: 1px solid var(--border-color);
+            padding: 0.7rem 0.9rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .checkbox-item:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .checkbox-item input {
+            accent-color: var(--neon-blue);
+            width: 15px;
+            height: 15px;
+        }
+
+        .checkbox-item.active {
+            border-color: var(--neon-blue);
+            background: rgba(0, 112, 243, 0.05);
+        }
+
+        /* RESUMO LATERAL */
+        .budget-summary-sidebar {
+            position: sticky;
+            top: 90px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 0 30px rgba(0, 112, 243, 0.15);
+            backdrop-filter: blur(8px);
+        }
+
+        .summary-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.6rem;
+        }
+
+        .summary-block {
+            margin-bottom: 1rem;
+        }
+
+        .summary-block span.label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-block span.value {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .summary-list {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding-left: 1rem;
+            list-style: disc;
+        }
+
+        .total-box {
+            background: #030305;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1.2rem 0;
+            text-align: center;
+        }
+
+        .total-box .total-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .total-box .total-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-whatsapp-send {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            margin-bottom: 0.85rem;
+        }
+
+        .btn-whatsapp-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.7);
+        }
+
+        .btn-counter-offer {
+            width: 100%;
+            padding: 0.8rem;
+            background: transparent;
+            border: 1px dashed var(--neon-blue);
+            color: var(--neon-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-counter-offer:hover {
+            background: rgba(56, 189, 248, 0.08);
+        }
+
+        #counter-offer-container {
+            margin-top: 0.85rem;
+            background: #030305;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.85rem;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* AJUSTES MOBILE RESPONSIVOS ESPECÍFICOS */
+        @media (max-width: 968px) {
+            .budget-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .budget-summary-sidebar {
+                position: relative;
+                top: 0;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+            .hero p {
+                font-size: 0.95rem;
+            }
+            .section-title {
+                font-size: 1.7rem;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .budget-form-container {
+                padding: 1.2rem;
+            }
+            .budget-summary-sidebar {
+                padding: 1.2rem;
+            }
+            .logo {
+                font-size: 1.05rem;
+            }
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CANVAS DE PARTÍCULAS -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- HEADER PREMIUM -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo" onclick="playClickSound()">
+                <span class="logo-icon"><i class="fa-solid fa-cube"></i></span>
+                <span class="logo-text">Vision<span class="highlight">Sites</span></span>
+            </a>
+
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#beneficios" onclick="playClickSound()">Vantagens</a></li>
+                    <li><a href="#portfolio" onclick="playClickSound()">Portfólio</a></li>
+                    <li><a href="#orcamento" onclick="playClickSound()">Montar Orçamento</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#orcamento" class="btn-primary" onclick="playClickSound()">
+                    <span>Criar Meu Site</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1>Transforme ideias em <span>experiências digitais</span></h1>
+            <p>Seu negócio merece um site à altura. Configure seu projeto agora mesmo, escolha os recursos e receba o orçamento direto no WhatsApp.</p>
+            <a href="#orcamento" class="btn-primary" style="padding: 0.8rem 1.6rem; font-size: 0.95rem;" onclick="playClickSound()">
+                <i class="fa-solid fa-calculator"></i> Simular Orçamento Online
+            </a>
+        </div>
+    </section>
+
+    <!-- VANTAGENS -->
+    <section id="beneficios" class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">Por que escolher a Vision Sites?</h2>
+            <p class="section-subtitle">Entregamos soluções de alta performance focadas em converter visitantes em clientes.</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Velocidade Extrema</h3>
+                    <p>Sites otimizados para carregar em frações de segundo, garantindo melhor posicionamento no Google e retenção de usuários.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                    <h3>Design Responsivo</h3>
+                    <p>Perfeitamente adaptado para celulares, tablets e computadores, oferecendo uma experiência de navegação impecável em qualquer tela.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fa-solid fa-ranking-star"></i></div>
+                    <h3>Foco em Conversão & SEO</h3>
+                    <p>Estrutura pensada estrategicamente para transformar quem visita seu site em um cliente real através do WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFÓLIO COM NOMES GENÉRICOS NAS FOTOS -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <h2 class="section-title">Nosso Portfólio</h2>
+            <p class="section-subtitle">Conheça os projetos criados com base nos estilos solicitados.</p>
+
+            <div class="portfolio-filters">
+                <button class="filter-btn active" onclick="filterPortfolio('all', this)">Todos</button>
+                <button class="filter-btn" onclick="filterPortfolio('gourmet', this)">1. Gourmet</button>
+                <button class="filter-btn" onclick="filterPortfolio('ecommerce', this)">2. Loja Virtual</button>
+                <button class="filter-btn" onclick="filterPortfolio('fitness', this)">3. Fitness</button>
+                <button class="filter-btn" onclick="filterPortfolio('advogado', this)">4. Advogado</button>
+            </div>
+
+            <div class="portfolio-grid">
+                
+                <!-- 1. GOURMET -->
+                <div class="portfolio-card" data-category="gourmet">
+                    <div class="portfolio-image mock-gourmet">
+                        <div class="browser-topbar">
+                            <div class="b-dot b-dot-r"></div>
+                            <div class="b-dot b-dot-y"></div>
+                            <div class="b-dot b-dot-g"></div>
+                            <div class="b-url">gourmet.com.br</div>
+                        </div>
+                        <div class="gourmet-header">
+                            <div class="gourmet-logo">Gourmet</div>
+                            <div style="font-size:0.55rem; font-weight:700; color:#444;">Receitas | Pratos</div>
+                        </div>
+                        <div class="gourmet-body">
+                            <div class="gourmet-main-img">
+                                <div class="gourmet-badge">DESTAQUE</div>
+                            </div>
+                            <div class="gourmet-side">
+                                <div class="gourmet-recipe-card">Receita Especial 1</div>
+                                <div class="gourmet-recipe-card">Receita Especial 2</div>
+                                <div class="gourmet-recipe-card">Receita Especial 3</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Gourmet & Culinária</span>
+                        <h3>Portal Gastronômico</h3>
+                        <p>Plataforma de receitas e cardápios interativos com design limpo e focado na experiência visual.</p>
+                        <a href="#orcamento" class="portfolio-link" onclick="playClickSound()">Quero um projeto assim <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- 2. LOJA VIRTUAL -->
+                <div class="portfolio-card" data-category="ecommerce">
+                    <div class="portfolio-image mock-ecommerce">
+                        <div class="browser-topbar">
+                            <div class="b-dot b-dot-r"></div>
+                            <div class="b-dot b-dot-y"></div>
+                            <div class="b-dot b-dot-g"></div>
+                            <div class="b-url">lojavirtual.com.br</div>
+                        </div>
+                        <div class="ec-nav">
+                            <span>LOJA VIRTUAL</span>
+                            <span style="font-size:0.6rem; color:#aaa;">Moda | Ofertas</span>
+                        </div>
+                        <div class="ec-hero">
+                            <div>
+                                <div class="ec-title">coleção <span style="color:#d97706;">exclusiva</span></div>
+                                <div style="font-size:0.5rem; color:#ccc; margin-top:2px;">O estilo que você ama</div>
+                            </div>
+                            <div class="ec-btn">comprar</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Loja Virtual</span>
+                        <h3>E-commerce de Alta Conversão</h3>
+                        <p>Loja completa com banners de destaque, vitrine de produtos e checkout otimizado para vendas online.</p>
+                        <a href="#orcamento" class="portfolio-link" onclick="playClickSound()">Quero um projeto assim <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- 3. FITNESS -->
+                <div class="portfolio-card" data-category="fitness">
+                    <div class="portfolio-image mock-fitness">
+                        <div class="browser-topbar">
+                            <div class="b-dot b-dot-r"></div>
+                            <div class="b-dot b-dot-y"></div>
+                            <div class="b-dot b-dot-g"></div>
+                            <div class="b-url">fitness.com.br</div>
+                        </div>
+                        <div class="fit-inner">
+                            <div class="fit-img-side"></div>
+                            <div class="fit-yellow-side">
+                                <div style="font-size:0.45rem; font-weight:700; color:#333;">Fitness</div>
+                                <h4>PRIMEIRO MÊS GRÁTIS</h4>
+                                <p>PLANO ESPECIAL</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Fitness & Bem-estar</span>
+                        <h3>Landing Page Fitness</h3>
+                        <p>Página dinâmica focada em captação de alunos, planos de academia e chamadas fortes para ação.</p>
+                        <a href="#orcamento" class="portfolio-link" onclick="playClickSound()">Quero um projeto assim <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- 4. ADVOGADO (COM NOME "ADVOCACIA") -->
+                <div class="portfolio-card" data-category="advogado">
+                    <div class="portfolio-image mock-lawyer">
+                        <div class="browser-topbar" style="background:#111;">
+                            <div class="b-dot b-dot-r"></div>
+                            <div class="b-dot b-dot-y"></div>
+                            <div class="b-dot b-dot-g"></div>
+                            <div class="b-url" style="background:#222; color:#aaa;">advocacia.com.br</div>
+                        </div>
+                        <div class="law-content">
+                            <div class="law-brand">ADVOCACIA</div>
+                            <div class="law-heading">ESCRITÓRIO DE ADVOCACIA</div>
+                            <div class="law-sub">Excelência e tradição na defesa de seus direitos.</div>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Advocacia & Corporativo</span>
+                        <h3>Site Institucional Jurídico</h3>
+                        <p>Design sofisticado e sóbrio para transmitir autoridade, credibilidade e confiança aos clientes.</p>
+                        <a href="#orcamento" class="portfolio-link" onclick="playClickSound()">Quero um projeto assim <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ORÇAMENTO BUILDER -->
+    <section id="orcamento" class="budget-section">
+        <div class="container">
+            <h2 class="section-title">Monte seu Orçamento Interativo</h2>
+            <p class="section-subtitle">Preencha as opções abaixo para calcular o investimento do seu novo site em tempo real.</p>
+
+            <div class="budget-wrapper">
+                
+                <div class="budget-form-container">
+                    
+                    <div class="form-step">
+                        <h3><i class="fa-regular fa-user"></i> 1. Seus Dados</h3>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Nome Completo *</label>
+                                <input type="text" id="cli-nome" class="form-control" placeholder="Ex: João Silva" required>
+                            </div>
+                            <div class="form-group">
+                                <label>WhatsApp *</label>
+                                <input type="text" id="cli-whats" class="form-control" placeholder="(11) 99999-9999" required>
+                            </div>
+                        </div>
+                        <div class="grid-2" style="margin-top: 0.85rem;">
+                            <div class="form-group">
+                                <label>E-mail (Opcional)</label>
+                                <input type="email" id="cli-email" class="form-control" placeholder="joao@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Nome da Empresa</label>
+                                <input type="text" id="cli-empresa" class="form-control" placeholder="Sua Empresa Ltda">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 0.85rem;">
+                            <label>Cidade / Estado</label>
+                            <input type="text" id="cli-cidade" class="form-control" placeholder="São Paulo - SP">
+                        </div>
+                    </div>
+
+                    <div class="form-step">
+                        <h3><i class="fa-solid fa-layer-group"></i> 2. Escolha o Plano Base</h3>
+                        <div class="selection-grid">
+                            <label class="select-card active" onclick="selectPlan(this, 500, 'Site Básico', '1 a 3 Páginas')">
+                                <input type="radio" name="plano" value="500" data-nome="Site Básico" checked>
+                                <div class="title">Site Básico</div>
+                                <div class="price">R$ 500</div>
+                                <div class="desc">1 a 3 Páginas</div>
+                            </label>
+                            <label class="select-card" onclick="selectPlan(this, 800, 'Site Profissional', 'Até 6 Páginas')">
+                                <input type="radio" name="plano" value="800" data-nome="Site Profissional">
+                                <div class="title">Profissional</div>
+                                <div class="price">R$ 800</div>
+                                <div class="desc">Até 6 Páginas</div>
+                            </label>
+                            <label class="select-card" onclick="selectPlan(this, 1000, 'Site Premium', 'Até 10 Páginas')">
+                                <input type="radio" name="plano" value="1000" data-nome="Site Premium">
+                                <div class="title">Premium</div>
+                                <div class="price">R$ 1.000</div>
+                                <div class="desc">Até 10 Páginas</div>
+                            </label>
+                            <label class="select-card" onclick="selectPlan(this, 1500, 'Site Empresarial', 'Páginas Ilimitadas')">
+                                <input type="radio" name="plano" value="1500" data-nome="Site Empresarial">
+                                <div class="title">Empresarial</div>
+                                <div class="price">R$ 1.500</div>
+                                <div class="desc">Ilimitadas</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-step">
+                        <h3><i class="fa-solid fa-globe"></i> 3. Segmento / Tipo do Site</h3>
+                        <div class="form-group">
+                            <select id="tipo-site" class="form-control" onchange="updateSummary(); playClickSound();">
+                                <option value="Gourmet / Gastronomia">Gourmet / Gastronomia</option>
+                                <option value="Loja Virtual (E-commerce)">Loja Virtual (E-commerce)</option>
+                                <option value="Fitness / Academia">Fitness / Academia</option>
+                                <option value="Advocacia / Jurídico" selected>Advocacia / Jurídico</option>
+                                <option value="Site Institucional">Site Institucional</option>
+                                <option value="Landing Page">Landing Page</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-step">
+                        <h3><i class="fa-solid fa-paintbrush"></i> 4. Estilo / Tema do Design</h3>
+                        <div class="form-group">
+                            <select id="tema-site" class="form-control" onchange="updateSummary(); playClickSound();">
+                                <option value="Minimalista / Clean" selected>Minimalista / Clean</option>
+                                <option value="Temático / Personalizado por Nicho">Temático / Personalizado por Nicho</option>
+                                <option value="Moderno & Futurista (Dark Mode)">Moderno & Futurista (Dark Mode)</option>
+                                <option value="Corporativo / Executivo">Corporativo / Executivo</option>
+                                <option value="Vibrante / Criativo">Vibrante / Criativo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-step">
+                        <h3><i class="fa-solid fa-puzzle-piece"></i> 5. Recursos Adicionais</h3>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item" onclick="toggleCheckboxCard(this)">
+                                <input type="checkbox" name="extras" value="Painel Administrativo" data-preco="150" onchange="updateSummary()">
+                                <span>Painel Admin (+R$ 150)</span>
+                            </label>
+                            <label class="checkbox-item" onclick="toggleCheckboxCard(this)">
+                                <input type="checkbox" name="extras" value="Logo" data-preco="100" onchange="updateSummary()">
+                                <span>Logo (+R$ 100)</span>
+                            </label>
+                            <label class="checkbox-item" onclick="toggleCheckboxCard(this)">
+                                <input type="checkbox" name="extras" value="Bot WhatsApp" data-preco="80" onchange="updateSummary()">
+                                <span>Bot WhatsApp (+R$ 80)</span>
+                            </label>
+                            <label class="checkbox-item" onclick="toggleCheckboxCard(this)">
+                                <input type="checkbox" name="extras" value="Otimização SEO Avançada" data-preco="200" onchange="updateSummary()">
+                                <span>SEO Avançado (+R$ 200)</span>
+                            </label>
+                            <label class="checkbox-item" onclick="toggleCheckboxCard(this)">
+                                <input type="checkbox" name="extras" value="Domínio Próprio (.com.br)" data-preco="40" onchange="updateSummary()">
+                                <span>Domínio .com.br (+R$ 40)</span>
+                            </label>
+                            <label class="checkbox-item" onclick="toggleCheckboxCard(this)">
+                                <input type="checkbox" name="extras" value="Hospedagem Cloud Pro" data-preco="120" onchange="updateSummary()">
+                                <span>Hospedagem Cloud (+R$ 120)</span>
+                            </label>
+                            <label class="checkbox-item" onclick="toggleCheckboxCard(this)">
+                                <input type="checkbox" name="extras" value="Manutenção Mensal" data-preco="150" onchange="updateSummary()">
+                                <span>Manutenção (+R$ 150)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="budget-summary-sidebar">
+                    <div class="summary-title">
+                        <i class="fa-solid fa-receipt"></i> Resumo do Pedido
+                    </div>
+
+                    <div class="summary-block">
+                        <span class="label">Plano Base</span>
+                        <span class="value" id="sum-plano">Site Básico (R$ 500)</span>
+                    </div>
+
+                    <div class="summary-block">
+                        <span class="label">Segmento</span>
+                        <span class="value" id="sum-tipo">Advocacia / Jurídico</span>
+                    </div>
+
+                    <div class="summary-block">
+                        <span class="label">Estilo / Tema</span>
+                        <span class="value" id="sum-tema">Minimalista / Clean</span>
+                    </div>
+
+                    <div class="summary-block">
+                        <span class="label">Páginas</span>
+                        <span class="value" id="sum-paginas">1 a 3 Páginas</span>
+                    </div>
+
+                    <div class="summary-block">
+                        <span class="label">Adicionais</span>
+                        <ul class="summary-list" id="sum-extras">
+                            <li>Nenhum adicional selecionado</li>
+                        </ul>
+                    </div>
+
+                    <div class="total-box">
+                        <div class="total-label">Investimento Estimado</div>
+                        <div class="total-value" id="sum-total">R$ 500</div>
+                    </div>
+
+                    <button type="button" class="btn-whatsapp-send" onclick="playClickSound(); sendToWhatsApp();">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i> Enviar Orçamento via WhatsApp
+                    </button>
+
+                    <button type="button" class="btn-counter-offer" onclick="playClickSound(); toggleCounterOfferBox();">
+                        <i class="fa-solid fa-handshake"></i> Fazer Contraproposta
+                    </button>
+
+                    <div id="counter-offer-container">
+                        <div class="form-group" style="margin-bottom: 8px;">
+                            <label style="color: var(--neon-blue);">Valor Proposto (R$) *</label>
+                            <input type="text" id="cli-counter-value" class="form-control" placeholder="Ex: R$ 450" oninput="formatCurrencyInput(this)">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label style="color: var(--neon-blue);">Explique o motivo *</label>
+                            <textarea id="cli-counter-reason" class="form-control" placeholder="Por que este valor?"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SCRIPTS -->
+    <script>
+        let audioCtx = null;
+
+        function playClickSound() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(450, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.04);
+                
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.04);
+            } catch (e) {}
+        }
+
+        function filterPortfolio(category, btnElement) {
+            playClickSound();
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.portfolio-card');
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    card.classList.remove('hide');
+                } else {
+                    card.classList.add('hide');
+                }
+            });
+        }
+
+        /* ANIMAÇÃO DE PARTÍCULAS */
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particlesArray = [];
+        const numberOfParticles = Math.floor(window.innerWidth / 35);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(56, 189, 248, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray.length = 0;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        let currentPlanPrice = 500;
+        let currentPlanName = 'Site Básico';
+        let currentPagesName = '1 a 3 Páginas';
+        let counterOfferActive = false;
+
+        function selectPlan(element, price, name, pages) {
+            playClickSound();
+            document.querySelectorAll('.form-step .selection-grid')[0].querySelectorAll('.select-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            element.classList.add('active');
+            element.querySelector('input').checked = true;
+            
+            currentPlanPrice = price;
+            currentPlanName = name;
+            currentPagesName = pages;
+            updateSummary();
+        }
+
+        function toggleCheckboxCard(element) {
+            playClickSound();
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            if (checkbox.checked) {
+                element.classList.add('active');
+            } else {
+                element.classList.remove('active');
+            }
+            updateSummary();
+        }
+
+        function toggleCounterOfferBox() {
+            const container = document.getElementById('counter-offer-container');
+            counterOfferActive = !counterOfferActive;
+            if (counterOfferActive) {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+                document.getElementById('cli-counter-value').value = '';
+                document.getElementById('cli-counter-reason').value = '';
+            }
+        }
+
+        function formatCurrencyInput(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value === '') {
+                input.value = '';
+                return;
+            }
+            value = (parseFloat(value) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            input.value = value;
+        }
+
+        function updateSummary() {
+            document.getElementById('sum-plano').innerText = `${currentPlanName} (R$ ${currentPlanPrice.toLocaleString('pt-BR')})`;
+            
+            const tipoSite = document.getElementById('tipo-site').value;
+            document.getElementById('sum-tipo').innerText = tipoSite;
+
+            const temaSite = document.getElementById('tema-site').value;
+            document.getElementById('sum-tema').innerText = temaSite;
+            
+            document.getElementById('sum-paginas').innerText = currentPagesName;
+
+            const extrasCheckboxes = document.querySelectorAll('input[name="extras"]:checked');
+            const extrasListContainer = document.getElementById('sum-extras');
+            extrasListContainer.innerHTML = '';
+
+            let extrasTotal = 0;
+            if (extrasCheckboxes.length === 0) {
+                extrasListContainer.innerHTML = '<li>Nenhum adicional selecionado</li>';
+            } else {
+                extrasCheckboxes.forEach(cb => {
+                    const preco = parseFloat(cb.getAttribute('data-preco'));
+                    extrasTotal += preco;
+                    const li = document.createElement('li');
+                    li.innerText = `${cb.value} (+R$ ${preco})`;
+                    extrasListContainer.appendChild(li);
+                });
+            }
+
+            let total = currentPlanPrice + extrasTotal;
+            document.getElementById('sum-total').innerText = `R$ ${total.toLocaleString('pt-BR')}`;
+        }
+
+        function sendToWhatsApp() {
+            const nome = document.getElementById('cli-nome').value.trim();
+            const whats = document.getElementById('cli-whats').value.trim();
+
+            if (!nome || !whats) {
+                alert('Por favor, preencha pelo menos o seu Nome e WhatsApp no Passo 1.');
+                document.getElementById('cli-nome').focus();
+                return;
+            }
+
+            const counterValueStr = document.getElementById('cli-counter-value').value.trim();
+            const counterReason = document.getElementById('cli-counter-reason').value.trim();
+
+            if (counterOfferActive) {
+                if (!counterValueStr || !counterReason) {
+                    alert('Você abriu a contraproposta. Por favor, informe o valor desejado e explique o motivo.');
+                    document.getElementById('cli-counter-value').focus();
+                    return;
+                }
+            }
+
+            const email = document.getElementById('cli-email').value.trim();
+            const empresa = document.getElementById('cli-empresa').value.trim();
+            const cidade = document.getElementById('cli-cidade').value.trim();
+            const tipoSite = document.getElementById('tipo-site').value;
+            const temaSite = document.getElementById('tema-site').value;
+            
+            const extrasCheckboxes = document.querySelectorAll('input[name="extras"]:checked');
+            let extrasTotal = 0;
+            let extrasNames = [];
+            extrasCheckboxes.forEach(cb => {
+                extrasTotal += parseFloat(cb.getAttribute('data-preco'));
+                extrasNames.push(`${cb.value} (R$ ${cb.getAttribute('data-preco')})`);
+            });
+
+            let total = currentPlanPrice + extrasTotal;
+
+            let mensagem = `Olá, Vision Sites! Gostaria de fechar o seguinte orçamento:%0A%0A`;
+            mensagem += `*👤 Dados do Cliente:*%0A`;
+            mensagem += `- Nome: ${nome}%0A`;
+            mensagem += `- WhatsApp: ${whats}%0A`;
+            if (email) mensagem += `- E-mail: ${email}%0A`;
+            if (empresa) mensagem += `- Empresa: ${empresa}%0A`;
+            if (cidade) mensagem += `- Cidade: ${cidade}%0A%0A`;
+            
+            mensagem += `*🛠️ Configuração do Site:*%0A`;
+            mensagem += `- Plano: ${currentPlanName} (R$ ${currentPlanPrice})%0A`;
+            mensagem += `- Segmento: ${tipoSite}%0A`;
+            mensagem += `- Tema: ${temaSite}%0A`;
+            mensagem += `- Páginas: ${currentPagesName}%0A`;
+            mensagem += `- Adicionais: ${extrasNames.length > 0 ? extrasNames.join(', ') : 'Nenhum'}%0A%0A`;
+
+            if (counterOfferActive) {
+                mensagem += `*🤝 CONTRAPROPOSTA DO CLIENTE:*%0A`;
+                mensagem += `- Valor Proposto: ${counterValueStr}%0A`;
+                mensagem += `- Motivo: ${counterReason}%0A%0A`;
+            } else {
+                mensagem += `*💰 Total Estimado:* R$ ${total}%0A`;
+            }
+
+            const numeroWhatsApp = "5511999999999"; 
+            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagem}`, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* Vamos preparar o menu mobile nas próximas aulas */
+    }
+
+    #menu-mobile-btn {
+        display: block;
+    }
+
+    .header-actions .btn-primary {
+        display: none; /* Oculta botão grande no mobile se necessário, ou ajusta */
+    }
+}
