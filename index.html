@@ -170,7 +170,11 @@
         .inspect-box {
             width: min(100%, 420px); border-radius: 20px; padding: 1.4rem; border: 1px solid rgba(255,255,255,0.1);
             background: linear-gradient(135deg, rgba(17,12,12,0.95), rgba(10,8,8,0.95));
-            text-align: center;
+            text-align: center; position: relative;
+        }
+        .inspect-close {
+            position: absolute; top: 0.8rem; right: 0.8rem; width: 32px; height: 32px; border: 0; border-radius: 50%;
+            background: rgba(255,255,255,0.08); color: #fff; cursor: pointer;
         }
         .inspect-box h4 { margin-bottom: 0.6rem; font-size: 1.1rem; }
         .inspect-box p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
@@ -622,7 +626,7 @@
                         <div class="gourmet-body"><div class="gourmet-main-img">🍕</div><div class="gourmet-text"><div class="gourmet-tag">● Delivery 24h</div><div class="gourmet-title">Pizza artesanal<br>com sabor de verdade</div><div class="gourmet-desc">Uma experiência irresistível com massa crocante, molho caseiro e ingredientes selecionados.</div><div class="gourmet-btn">Pedir Agora</div></div></div>
                     </div>
                 </div>
-                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">Landing Page</span><span class="tag">Pizzaria</span></div><h3>Pizzaria Royal</h3><p>Landing page premium para pizzaria com destaque para delivery, cardápio e pedidos rápidos.</p><a href="#" class="portfolio-link">Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
+                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">Landing Page</span><span class="tag">Pizzaria</span></div><h3>Pizzaria Royal</h3><p>Landing page premium para pizzaria com destaque para delivery, cardápio e pedidos rápidos.</p><a href="#" class="portfolio-link" data-whatsapp-trigger>Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
             </div>
 
             <!-- Card 2 -->
@@ -636,7 +640,7 @@
                         <div class="saas-content"><div class="saas-header"><div class="saas-title">Dashboard</div><div class="saas-badge">● Live</div></div><div class="saas-cards"><div class="saas-card"><div class="saas-card-num">R$84k</div><div class="saas-card-lbl">Receita (mês)</div></div><div class="saas-card"><div class="saas-card-num">1.2k</div><div class="saas-card-lbl">Usuários ativos</div></div></div><div class="saas-chart"><div class="bar" style="height:50%;width:12px;"></div><div class="bar" style="height:70%;width:12px;"></div><div class="bar" style="height:55%;width:12px;"></div><div class="bar" style="height:90%;width:12px;"></div><div class="bar" style="height:65%;width:12px;"></div><div class="bar" style="height:80%;width:12px;"></div><div class="bar" style="height:100%;width:12px;"></div></div></div>
                     </div>
                 </div>
-                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span></div><h3>Vault Analytics</h3><p>Sistema SaaS de analytics com dashboard em tempo real, relatórios automáticos e integração com múltiplas fontes de dados.</p><a href="#" class="portfolio-link">Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
+                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">SaaS</span><span class="tag">Dashboard</span></div><h3>Vault Analytics</h3><p>Sistema SaaS de analytics com dashboard em tempo real, relatórios automáticos e integração com múltiplas fontes de dados.</p><a href="#" class="portfolio-link" data-whatsapp-trigger>Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
             </div>
 
             <!-- Card 3 -->
@@ -649,7 +653,7 @@
                         <div class="fitness-bg"><div class="fitness-label">⚡ Programa Premium</div><div class="fitness-title">Seu corpo.<br>Sua <span>evolução.</span></div><div class="fitness-stats"><div class="fitness-stat"><div class="fitness-stat-num">+500</div><div class="fitness-stat-lbl">Alunos</div></div><div class="fitness-stat"><div class="fitness-stat-num">12 sem</div><div class="fitness-stat-lbl">Programa</div></div><div class="fitness-stat"><div class="fitness-stat-num">4.9★</div><div class="fitness-stat-lbl">Avaliação</div></div></div><div class="fitness-cta">COMEÇAR AGORA →</div></div>
                     </div>
                 </div>
-                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">Landing Page</span><span class="tag">Fitness</span></div><h3>Iron Peak Fitness</h3><p>Landing page de alta conversão para programa de treinamento online com funil integrado e upsell automático.</p><a href="#" class="portfolio-link">Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
+                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">Landing Page</span><span class="tag">Fitness</span></div><h3>Iron Peak Fitness</h3><p>Landing page de alta conversão para programa de treinamento online com funil integrado e upsell automático.</p><a href="#" class="portfolio-link" data-whatsapp-trigger>Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
             </div>
 
             <!-- Card 4 -->
@@ -663,7 +667,7 @@
                         <div class="ecom-body"><div class="ecom-prod"><div class="ecom-img" style="background:#fde8e8;">👜</div><div class="ecom-pname">Bolsa Couro Premium</div><div class="ecom-price">R$ 599</div></div><div class="ecom-prod"><div class="ecom-img" style="background:#fde8e8;">⌚</div><div class="ecom-pname">Relógio Clássico</div><div class="ecom-price">R$ 1.299</div></div><div class="ecom-prod"><div class="ecom-img" style="background:#fde8e8;">💍</div><div class="ecom-pname">Anel Banhado</div><div class="ecom-price">R$ 349</div></div><div class="ecom-prod"><div class="ecom-img" style="background:#fde8e8;">🕶️</div><div class="ecom-pname">Óculos de Sol</div><div class="ecom-price">R$ 289</div></div></div>
                     </div>
                 </div>
-                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">E-commerce</span><span class="tag">Moda</span></div><h3>LuxeStore</h3><p>E-commerce completo para moda e acessórios premium com checkout otimizado e integração com múltiplos gateways.</p><a href="#" class="portfolio-link">Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
+                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">E-commerce</span><span class="tag">Moda</span></div><h3>LuxeStore</h3><p>E-commerce completo para moda e acessórios premium com checkout otimizado e integração com múltiplos gateways.</p><a href="#" class="portfolio-link" data-whatsapp-trigger>Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
             </div>
 
             <!-- Card 5 -->
@@ -677,7 +681,7 @@
                         <div class="land-body"><div class="land-eyebrow">🚀 Inovação Digital</div><div class="land-h">O futuro do seu<br>negócio começa <span>aqui</span></div><div class="land-p">Soluções tecnológicas que escalam junto com você</div><div class="land-btn">Quero Crescer →</div></div>
                     </div>
                 </div>
-                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">Landing Page</span><span class="tag">Tecnologia</span></div><h3>Apex Labs</h3><p>Landing page de alta conversão para startup de tecnologia com animações cinematográficas e UI de impacto.</p><a href="#" class="portfolio-link">Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
+                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">Landing Page</span><span class="tag">Tecnologia</span></div><h3>Apex Labs</h3><p>Landing page de alta conversão para startup de tecnologia com animações cinematográficas e UI de impacto.</p><a href="#" class="portfolio-link" data-whatsapp-trigger>Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
             </div>
 
             <!-- Card 6 -->
@@ -691,7 +695,7 @@
                         <div class="clinic-body"><div class="clinic-card"><div class="clinic-icon"><i class="fas fa-user-doctor"></i></div><div><div class="clinic-title2">Dr. Carlos Medina</div><div class="clinic-sub">Cardiologista · 4.9★</div></div></div><div class="clinic-card"><div class="clinic-icon"><i class="fas fa-calendar-check"></i></div><div><div class="clinic-title2">Agendamento Online</div><div class="clinic-sub">Disponível 24h</div></div></div><div class="clinic-card"><div class="clinic-icon"><i class="fas fa-heart-pulse"></i></div><div><div class="clinic-title2">Teleconsulta</div><div class="clinic-sub">Planos a partir de R$89</div></div></div></div>
                     </div>
                 </div>
-                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">Institucional</span><span class="tag">Saúde</span></div><h3>Clínica Vida</h3><p>Site institucional para clínica médica com agendamento online, perfil de médicos e teleconsulta integrada.</p><a href="#" class="portfolio-link">Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
+                <div class="portfolio-body"><div class="portfolio-tags"><span class="tag">Institucional</span><span class="tag">Saúde</span></div><h3>Clínica Vida</h3><p>Site institucional para clínica médica com agendamento online, perfil de médicos e teleconsulta integrada.</p><a href="#" class="portfolio-link" data-whatsapp-trigger>Ver Projeto <i class="fas fa-arrow-right"></i></a></div>
             </div>
 
         </div>
@@ -810,6 +814,7 @@
 
 <div class="inspect-overlay" id="inspectOverlay" aria-hidden="true">
     <div class="inspect-box">
+        <button class="inspect-close" id="closeInspectOverlay" aria-label="Fechar">×</button>
         <h4>Acesso restrito</h4>
         <p>Algumas partes do código foram ocultadas para proteger o conteúdo e a estrutura do site.</p>
     </div>
@@ -821,6 +826,7 @@ const leadModal = document.getElementById('leadModal');
 const closeLeadModalButton = document.getElementById('closeLeadModal');
 const leadForm = document.getElementById('whatsappLeadForm');
 const inspectOverlay = document.getElementById('inspectOverlay');
+const closeInspectOverlayButton = document.getElementById('closeInspectOverlay');
 
 function openLeadModal() {
     leadModal.classList.add('active');
@@ -887,6 +893,13 @@ window.addEventListener('focus', () => {
     if (document.body.classList.contains('inspect-blocked')) {
         activateInspectProtection();
     }
+});
+
+closeInspectOverlayButton?.addEventListener('click', () => {
+    inspectOverlay?.classList.remove('active');
+    inspectOverlay?.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('inspect-blocked');
+    document.body.style.overflow = '';
 });
 
 // PARTICLES
