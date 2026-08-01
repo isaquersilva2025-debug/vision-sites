@@ -866,6 +866,7 @@ function activateInspectProtection() {
     document.body.classList.add('inspect-blocked');
     inspectOverlay?.classList.add('active');
     inspectOverlay?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
 }
 
 window.addEventListener('keydown', (event) => {
@@ -880,6 +881,12 @@ window.addEventListener('keydown', (event) => {
 window.addEventListener('contextmenu', (event) => {
     event.preventDefault();
     activateInspectProtection();
+});
+
+window.addEventListener('focus', () => {
+    if (document.body.classList.contains('inspect-blocked')) {
+        activateInspectProtection();
+    }
 });
 
 // PARTICLES
